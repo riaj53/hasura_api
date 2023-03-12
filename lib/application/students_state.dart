@@ -32,5 +32,5 @@ class StudentsState extends Equatable {
   @override
   List<Object> get props => [failure, loading, listStu];
   factory StudentsState.init() =>
-      StudentsState(failure: CleanFailure.none(), loading: false, listStu: []);
+      StudentsState(failure: CleanFailure.none(), loading: false, listStu: const []);
 }

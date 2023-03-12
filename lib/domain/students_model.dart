@@ -61,5 +61,5 @@ class StudentsModel extends Equatable {
   @override
   List<Object> get props => [id, email, name, phone];
   factory StudentsModel.init() =>
-      StudentsModel(id: 0, email: '', name: '', phone: 0);
+      const StudentsModel(id: 0, email: '', name: '', phone: 0);
 }
