@@ -16,51 +16,67 @@ class HomePage extends HookConsumerWidget {
       return null;
     }, []);
     final data = ref.watch(studentsProvider.select((value) => value.listStu));
+    final loading =
+        ref.watch(studentsProvider.select((value) => value.loading));
     return Scaffold(
       appBar: AppBar(
         title: const Text('GetData'),
       ),
-      body: ListView.builder(
-          itemCount: data.length,
-          itemBuilder: (context, index) {
-            final students = data[index];
-            return Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: Container(
-                height: 100,
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 159, 185, 197),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Row(
-                  children: [
-                    const Icon(
-                      Icons.person,
-                      size: 40,
+      body: loading
+          ? CircularProgressIndicator()
+          : ListView.builder(
+              itemCount: data.length,
+              itemBuilder: (context, index) {
+                final students = data[index];
+                return Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Container(
+                    height: 100,
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 159, 185, 197),
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                    20.widthBox,
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    child: Row(
                       children: [
-                        Text('Name:  ${students.name}')
-                            .text
-                            .bold
-                            .size(20)
-                            .make(),
-                        5.heightBox,
-                        Text(
-                          'Email:  ${students.email}',
-                        ).text.size(18).make(),
-                        5.heightBox,
-                        Text('Phone: ${students.phone.toString()}'),
+                        const Icon(
+                          Icons.person,
+                          size: 40,
+                        ),
+                        20.widthBox,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Name:  ${students.name}')
+                                    .text
+                                    .bold
+                                    .size(20)
+                                    .make(),
+                                5.heightBox,
+                                Text(
+                                  'Email:  ${students.email}',
+                                ).text.size(18).make(),
+                                5.heightBox,
+                                Text('Phone: ${students.phone.toString()}'),
+                              ],
+                            ),
+                            IconButton(
+                                onPressed: () {
+                                  ref
+                                      .read(studentsProvider.notifier)
+                                      .deletStu(id: students.id);
+                                },
+                                icon: Icon(Icons.delete))
+                          ],
+                        )
                       ],
-                    )
-                  ],
-                ),
-              ),
-            );
-          }),
+                    ),
+                  ),
+                );
+              }),
     );
   }
 }
