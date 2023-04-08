@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:won_api/application/students_state.dart';
 import 'package:won_api/domain/i_students_repo.dart';
 import 'package:won_api/domain/post_student_model.dart';
+import 'package:won_api/domain/students_model.dart';
 import 'package:won_api/infractructure/students_repo.dart';
 
 final studentsProvider =
@@ -42,4 +43,6 @@ class StudentsNotifier extends StateNotifier<StudentsState> {
     });
     getStudentsData();
   }
+
+  
 }

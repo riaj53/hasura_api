@@ -27,7 +27,9 @@ class StudentsRepo extends IStudentsRepo {
 
   @override
   Future<Either<CleanFailure, Unit>> deletStu({required id}) {
-    return cleanApi.delete(fromData: (json) => unit, 
-    body: {'id':id},endPoint: 'deletStudent');
+    return cleanApi.delete(
+        fromData: (json) => unit, body: {'id': id}, endPoint: 'deletStudent');
   }
+
+
 }

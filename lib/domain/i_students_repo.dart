@@ -7,4 +7,5 @@ abstract class IStudentsRepo {
   Future<Either<CleanFailure, Unit>> postStudent(
       {required PostStudentModel postmodel});
   Future<Either<CleanFailure, Unit>> deletStu({required id});
+ 
 }
